@@ -1,0 +1,35 @@
+#include <Wire.h>
+#include <Adafruit_ADS1015.h>
+
+Adafruit_ADS1115 ads(0x48)
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Comenzando medicion de oxigeno");
+  ads.begin();
+}
+
+void loop() {
+  //variables para la lectura del sensor de oxigeno
+  int16_t adc0, adc1, adc2, adc3;
+  //se realizan cuatro lecturas del sensor al mismo tiempo
+  adc0=ads.readADC_SingleEnded(0);
+  adc1=ads.readADC_SingleEnded(1);
+  adc2=ads.readADC_SingleEnded(2);
+  adc3=ads.readADC_SingleEnded(3);
+  //impresion en monitor serial en porcentaje
+  Serial.print("AIN0: ");
+  Serial.println(adc0);
+  Serial.print("AIN1: ");
+  Serial.println(adc1);
+  Serial.print("AIN2: ");
+  Serial.println(adc2);
+  Serial.print("AIN3: ");
+  Serial.println(adc3);
+  Serial.println(" ");
+  delay(1000);
+  
+  //estos datos registrados se guardan en la raspberry
+  //comunicacion entre arduino y raspberry
+  
+}
